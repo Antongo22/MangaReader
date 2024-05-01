@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34714.143
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MangaReader", "MangaReader.csproj", "{3826F3ED-7B1F-49B2-9710-4DD5BF36E1E4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3826F3ED-7B1F-49B2-9710-4DD5BF36E1E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3826F3ED-7B1F-49B2-9710-4DD5BF36E1E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3826F3ED-7B1F-49B2-9710-4DD5BF36E1E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3826F3ED-7B1F-49B2-9710-4DD5BF36E1E4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {627E7C58-398E-45E6-80F9-D0E73199EE52}
+	EndGlobalSection
+EndGlobal
