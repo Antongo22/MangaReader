@@ -25,7 +25,7 @@
 
         <GridSplitter Grid.Column="1" HorizontalAlignment="Left" Width="4" Background="#2f323f"/>
 
-        <ListBox x:Name="ListBoxManga" MouseLeftButtonUp="ListBoxManga_MouseLeftButtonUp" >
+        <ListBox x:Name="ListBoxManga" SelectionChanged="ListBoxManga_SelectionChanged" >
             <ListBox.Resources>
                 <Style TargetType="ScrollViewer">
                     <Setter Property="Template">

@@ -23,7 +23,7 @@
 
         <GridSplitter Grid.Column="1" HorizontalAlignment="Left" Width="4" Background="#2f323f"/>
 
-        <ListBox x:Name="ChaptersList" MouseLeftButtonUp="ChaptersList_MouseLeftButtonUp" >
+        <ListBox x:Name="ChaptersList" SelectionChanged="ChaptersList_SelectionChanged" >
             <ListBox.Resources>
                 <Style TargetType="ScrollViewer">
                     <Setter Property="Template">

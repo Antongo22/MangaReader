@@ -23,7 +23,7 @@ namespace MangaReader.Pages
     {
         PicturePage picturePage;
         MainWindow mainWindow;
-
+        public bool isLastp = false;
 
         public MangaChapters(MainWindow mainWindow)
         {
@@ -44,19 +44,41 @@ namespace MangaReader.Pages
             }
         }
 
-        private void ChaptersList_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+
+        public void OpenLastPage()
         {
+            isLastp = true;
+            picturePage = new(mainWindow, ChaptersList.SelectedItem as Chapter, this);
+            MangaPictFrame.Content = picturePage;
+
+            var index = picturePage.ListBoxPictures.Items.Count - 1;
+            picturePage.ListBoxPictures.SelectedItem = index;
+        }
+
+        public void OpenFirstPage()
+        {
+            var firstImage = (picturePage.ListBoxPictures.Items.Count > 0) ? picturePage.ListBoxPictures.Items[0] : null;
+
+            picturePage.ListBoxPictures.SelectedItem = firstImage;
+        }
+
+        private void ChaptersList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (isLastp)
+            {
+                System.Windows.Forms.MessageBox.Show("Test");
+                isLastp = false;
+                return;
+            }
+
             if (ChaptersList.SelectedItem != null)
             {
-                picturePage = new(mainWindow, ChaptersList.SelectedItem as Chapter);
+                picturePage = new(mainWindow, ChaptersList.SelectedItem as Chapter, this);
                 MangaPictFrame.Content = picturePage;
 
-                // Получаем первое изображение главы
-                var firstImage = (picturePage.ListBoxPictures.Items.Count > 0) ? picturePage.ListBoxPictures.Items[0] : null;
-
-                // Выбираем первое изображение в ListBox
-                picturePage.ListBoxPictures.SelectedItem = firstImage;
+                OpenFirstPage();
             }
         }
     }
+    
 }

@@ -24,12 +24,14 @@ namespace MangaReader.Pages
     {
         MainWindow mainWindow;
         Chapter chapter;
+        MangaChapters mangaChapters;
 
-        public PicturePage(MainWindow mainWindow, Chapter chapter)
+        public PicturePage(MainWindow mainWindow, Chapter chapter, MangaChapters mangaChapters)
         {
             InitializeComponent();
             this.mainWindow = mainWindow;
             this.chapter = chapter;
+            this.mangaChapters = mangaChapters;
 
             LoadPictures();
         }
@@ -109,6 +111,37 @@ namespace MangaReader.Pages
             }
         }
 
-
+        private void ListBoxPictures_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Up || e.Key == Key.Left)
+            {
+                if (ListBoxPictures.SelectedIndex > 0)
+                {
+                    ListBoxPictures.SelectedIndex--;
+                    e.Handled = true;
+                }
+                else if (mangaChapters.ChaptersList.SelectedIndex > 0) 
+                {
+                    mangaChapters.ChaptersList.SelectedIndex--;
+                    mangaChapters.isLastp = true;
+                    mangaChapters.OpenLastPage();
+                    e.Handled = true;
+                }
+            }
+            else if (e.Key == Key.Down || e.Key == Key.Right)
+            {
+                if (ListBoxPictures.SelectedIndex < ListBoxPictures.Items.Count - 1)
+                {
+                    ListBoxPictures.SelectedIndex++;
+                    e.Handled = true;
+                }
+                else if(mangaChapters.ChaptersList.SelectedIndex < mangaChapters.ChaptersList.Items.Count - 1)
+                {
+                    mangaChapters.ChaptersList.SelectedIndex++;
+                    mangaChapters.OpenFirstPage();
+                    e.Handled = true;
+                }
+            }
+        }
     }
 }

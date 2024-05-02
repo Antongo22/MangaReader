@@ -54,7 +54,7 @@ namespace MangaReader.Pages
             
         }
 
-        private void ListBoxManga_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        private void ListBoxManga_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             mangaChapters.LoadManga(ListBoxManga.SelectedItem as Manga);
         }
