@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MangaReader.Struct;
 
 namespace MangaReader.Pages
 {
@@ -21,13 +22,26 @@ namespace MangaReader.Pages
     public partial class MainPage : Page
     {
         MangaChapters mangaChapters;
-        public MainPage()
+        MainWindow mainWindow;
+
+        public MainPage(MainWindow mainWindow)
         {
             InitializeComponent();
 
-            mangaChapters = new();
+            mangaChapters = new(mainWindow);
 
             MangaChaptersFrame.Content = mangaChapters;
+            this.mainWindow = mainWindow;
+
+            LoadManga();
+        }
+
+        public void LoadManga()
+        {
+            foreach(var manga in mainWindow.mangas)
+            {
+                ListBoxManga.Items.Add(manga);
+            }
         }
 
         public void LoadFilteredManga(string searchText)
@@ -38,6 +52,11 @@ namespace MangaReader.Pages
         public void UpdateListsManga()
         {
             
+        }
+
+        private void ListBoxManga_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            mangaChapters.LoadManga(ListBoxManga.SelectedItem as Manga);
         }
     }
 }

@@ -12,7 +12,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.IO;
+using System.Windows.Forms;
+using MangaReader.Struct;
 
 namespace MangaReader
 {
@@ -23,16 +25,25 @@ namespace MangaReader
     {
         MainPage mainPage;
         string findText = "Поиск манги";
+        public List<Manga> mangas;
+
+        string pathToSave = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Manga");
         
         public MainWindow()
         {
             InitializeComponent();
+
+            if (!Directory.Exists(pathToSave))
+            {
+                Directory.CreateDirectory(pathToSave);
+            }
+            GetManga();
         }
 
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            mainPage = new MainPage();
+            mainPage = new MainPage(this);
             MainFrame.Content = mainPage;
         }
 
@@ -95,5 +106,98 @@ namespace MangaReader
 
         #endregion
 
+        private void AddManga_Click(object sender, RoutedEventArgs e)
+        {
+            using (var dialog = new System.Windows.Forms.FolderBrowserDialog())
+            {
+                dialog.Description = "Выберите исходную папку для копирования";
+                dialog.ShowNewFolderButton = true;
+
+                if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    newName:
+                    string newFolderName = Microsoft.VisualBasic.Interaction.InputBox("Введите название новой папки:", "Создание новой папки", "Новая папка");
+
+                    if (!string.IsNullOrWhiteSpace(newFolderName))
+                    {
+                        string newFolderPath = Path.Combine(pathToSave, newFolderName);
+
+                        if (Directory.Exists(newFolderPath))
+                        {
+                            System.Windows.MessageBox.Show("Папка с таким именем уже существует. Введите другое название.", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
+                            goto newName;
+                        }
+
+                        Directory.CreateDirectory(newFolderPath);
+                        CopyFolder(dialog.SelectedPath, newFolderPath);
+
+                        Manga m = new(Path.GetFileName(dialog.SelectedPath), Path.Combine(pathToSave, Path.GetFileName(dialog.SelectedPath)));
+
+                        mangas.Add(m);
+                        mainPage.ListBoxManga.Items.Add(m);
+
+
+                        System.Windows.MessageBox.Show("Папка успешно скопирована!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                    else
+                    {
+                        System.Windows.MessageBox.Show("Вы не ввели название новой папки!", "Предупреждение", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// Метод для копирования содержимого папки
+        /// </summary>
+        /// <param name="sourceFolder"></param>
+        /// <param name="destFolder"></param>
+        private void CopyFolder(string sourceFolder, string destFolder)
+        {
+            if (!Directory.Exists(destFolder))
+            {
+                Directory.CreateDirectory(destFolder);
+            }
+
+            string[] files = Directory.GetFiles(sourceFolder);
+            foreach (string file in files)
+            {
+                string name = Path.GetFileName(file);
+                string dest = Path.Combine(destFolder, name);
+                File.Copy(file, dest);
+            }
+
+            // Рекурсивное копирование подпапок
+            string[] folders = Directory.GetDirectories(sourceFolder);
+            foreach (string folder in folders)
+            {
+                string name = Path.GetFileName(folder);
+                string dest = Path.Combine(destFolder, name);
+                CopyFolder(folder, dest);
+            }
+        }
+
+       void GetManga()
+       {
+            mangas = new List<Manga>();
+
+            try
+            {
+                if (Directory.Exists(pathToSave))
+                {
+                    // Получаем список подпапок в указанной директории
+                    string[] subdirectories = Directory.GetDirectories(pathToSave);
+
+                    // Добавляем названия подпапок в список
+                    foreach (string subdirectory in subdirectories)
+                    {
+                        mangas.Add(new(Path.GetFileName(subdirectory), subdirectory));
+                    }
+
+                }
+            }
+            catch (Exception ex) { }
+        }
     }
 }

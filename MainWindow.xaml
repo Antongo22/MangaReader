@@ -52,7 +52,7 @@
                 Click="ClearText_Click" Visibility="Hidden" Width="16"/>
 
 
-        <Button Content="Добавить книгу" HorizontalAlignment="Right" Margin="0,0,10,0" RenderTransformOrigin="1.01,0.05" Height="20" Width="115"/>
+        <Button x:Name="AddManga" Content="Добавить мангу" HorizontalAlignment="Right" Margin="0,0,10,0" RenderTransformOrigin="1.01,0.05" Height="20" Width="115" Click="AddManga_Click" />
 
     </Grid>
 </Window>

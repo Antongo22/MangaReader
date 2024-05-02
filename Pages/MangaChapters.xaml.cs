@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MangaReader.Struct;
 
 namespace MangaReader.Pages
 {
@@ -21,13 +22,30 @@ namespace MangaReader.Pages
     public partial class MangaChapters : Page
     {
         PicturePage picturePage;
-        public MangaChapters()
+        MainWindow mainWindow;
+
+
+        public MangaChapters(MainWindow mainWindow)
         {
             InitializeComponent();
 
-            picturePage = new();
+            this.mainWindow = mainWindow;
+        }
 
+        public void LoadManga(Manga manga)
+        {
+            if(manga == null) { return; }
+            foreach(var ch in manga.Chapters)
+            {
+                ChaptersList.Items.Add(ch);
+            }
+        }
+
+        private void ChaptersList_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            picturePage = new(mainWindow, ChaptersList.SelectedItem as Chapter);
             MangaPictFrame.Content = picturePage;
+
         }
     }
 }

@@ -10,7 +10,7 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="9*" MinWidth="150"/>
+            <ColumnDefinition Width="9*" MinWidth="100"/>
             <ColumnDefinition Width="31*" MinWidth="200"/>
         </Grid.ColumnDefinitions>
         <Grid.Resources>
@@ -23,7 +23,7 @@
 
         <GridSplitter Grid.Column="1" HorizontalAlignment="Left" Width="4" Background="#2f323f"/>
 
-        <ListBox >
+        <ListBox x:Name="ChaptersList" MouseLeftButtonUp="ChaptersList_MouseLeftButtonUp" >
             <ListBox.Resources>
                 <Style TargetType="ScrollViewer">
                     <Setter Property="Template">
@@ -58,19 +58,17 @@
                     </Setter>
                 </Style>
             </ListBox.Resources>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding ChapterName}" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
         </ListBox>
 
         <Frame x:Name="MangaPictFrame" Margin="4,0,0,0" 
-       RenderTransformOrigin="0.5,0.5"  NavigationUIVisibility="Hidden" Grid.Column="1">
-            <Frame.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleX="-1"/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </Frame.RenderTransform>
-        </Frame>
+       RenderTransformOrigin="0.5,0.5"  NavigationUIVisibility="Hidden" Grid.Column="1"/>
+
+
 
     </Grid>
 </Page>
