@@ -1,0 +1,29 @@
+﻿<Page x:Class="MangaReader.Pages.PicturePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MangaReader.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="500" d:DesignWidth="500"
+      Title="PicturePage" MinWidth="250">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <!-- Левая часть -->
+            <ColumnDefinition Width="*" />
+            <!-- Правая часть -->
+        </Grid.ColumnDefinitions>
+
+        <!-- Левая часть -->
+        <Border Grid.Column="0" Background="Transparent" MouseLeftButtonDown="LeftPart_MouseLeftButtonDown">
+            <!-- Здесь размещайте элементы для левой части страницы -->
+        </Border>
+
+        <!-- Правая часть -->
+        <Border Grid.Column="1" Background="Transparent" MouseLeftButtonDown="RightPart_MouseLeftButtonDown">
+            <!-- Здесь размещайте элементы для правой части страницы -->
+        </Border>
+    </Grid>
+</Page>

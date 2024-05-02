@@ -16,18 +16,23 @@ using System.Windows.Shapes;
 namespace MangaReader.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для MangaChapters.xaml
+    /// Логика взаимодействия для PicturePage.xaml
     /// </summary>
-    public partial class MangaChapters : Page
+    public partial class PicturePage : Page
     {
-        PicturePage picturePage;
-        public MangaChapters()
+        public PicturePage()
         {
             InitializeComponent();
+        }
 
-            picturePage = new();
+        private void LeftPart_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
 
-            MangaPictFrame.Content = picturePage;
+        }
+
+        private void RightPart_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
         }
     }
 }

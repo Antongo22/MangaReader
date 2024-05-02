@@ -9,6 +9,68 @@
       Title="MangaChapters">
 
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="9*" MinWidth="150"/>
+            <ColumnDefinition Width="31*" MinWidth="200"/>
+        </Grid.ColumnDefinitions>
+        <Grid.Resources>
+            <Style TargetType="ListBox">
+                <Setter Property="BorderBrush" Value="#74788d"/>
+                <Setter Property="Background" Value="#2f323f"/>
+                <Setter Property="Foreground" Value="#f5f6f8"/>
+            </Style>
+        </Grid.Resources>
+
+        <GridSplitter Grid.Column="1" HorizontalAlignment="Left" Width="4" Background="#2f323f"/>
+
+        <ListBox >
+            <ListBox.Resources>
+                <Style TargetType="ScrollViewer">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ScrollViewer">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="25*"/>
+                                        <RowDefinition Height="422*"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <ScrollContentPresenter Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"/>
+
+                                    <ScrollBar x:Name="PART_VerticalScrollBar"
+                         Grid.Column="1" Grid.Row="0" 
+                         Background="#FF343A40"
+                         Width="18"
+                         Margin="0,-1,0,-1"
+                         Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
+                         Maximum="{TemplateBinding ScrollableHeight}"
+                         ViewportSize="{TemplateBinding ViewportHeight}"
+                         Value="{Binding VerticalOffset, Mode=OneWay, 
+                     RelativeSource={RelativeSource TemplatedParent}}" Grid.RowSpan="3"/>
+                                </Grid>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListBox.Resources>
+        </ListBox>
+
+        <Frame x:Name="MangaPictFrame" Margin="4,0,0,0" 
+       RenderTransformOrigin="0.5,0.5"  NavigationUIVisibility="Hidden" Grid.Column="1">
+            <Frame.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="-1"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Frame.RenderTransform>
+        </Frame>
+
     </Grid>
 </Page>

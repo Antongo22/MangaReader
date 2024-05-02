@@ -20,9 +20,14 @@ namespace MangaReader.Pages
     /// </summary>
     public partial class MainPage : Page
     {
+        MangaChapters mangaChapters;
         public MainPage()
         {
             InitializeComponent();
+
+            mangaChapters = new();
+
+            MangaChaptersFrame.Content = mangaChapters;
         }
 
         public void LoadFilteredManga(string searchText)
