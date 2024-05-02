@@ -41,6 +41,8 @@ namespace MangaReader.Pages
                 return;
             }
 
+            chapter.GetImages();
+
             // Сортируем изображения по числовому порядку их имен
             var sortedImages = chapter.Images.OrderBy(image => GetImageNumberFromFileName(image));
 

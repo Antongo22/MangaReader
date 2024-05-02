@@ -35,7 +35,10 @@ namespace MangaReader.Pages
         public void LoadManga(Manga manga)
         {
             if(manga == null) { return; }
-            foreach(var ch in manga.Chapters)
+
+            manga.GetChapters();
+
+            foreach (var ch in manga.Chapters)
             {
                 ChaptersList.Items.Add(ch);
             }

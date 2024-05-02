@@ -10,8 +10,8 @@
 
     <Grid x:Name="ListOfManga" Margin="2,0,0,0">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="9*" MinWidth="100"/>
-            <ColumnDefinition Width="31*" MinWidth="200"/>
+            <ColumnDefinition Width="65*" MinWidth="100"/>
+            <ColumnDefinition Width="334*" MinWidth="200"/>
         </Grid.ColumnDefinitions>
 
 

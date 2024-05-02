@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.IO;
 using System.Windows.Forms;
 using MangaReader.Struct;
+using System.Diagnostics;
 
 namespace MangaReader
 {
@@ -131,13 +132,11 @@ namespace MangaReader
                         Directory.CreateDirectory(newFolderPath);
                         CopyFolder(dialog.SelectedPath, newFolderPath);
 
-                        Manga m = new(Path.GetFileName(dialog.SelectedPath), Path.Combine(pathToSave, Path.GetFileName(dialog.SelectedPath)));
+                        System.Windows.MessageBox.Show("Приложение будет перезапущено!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                        mangas.Add(m);
-                        mainPage.ListBoxManga.Items.Add(m);
-
-
-                        System.Windows.MessageBox.Show("Папка успешно скопирована!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                        string appPath = Process.GetCurrentProcess().MainModule.FileName;
+                        Process.Start(appPath);
+                        Process.GetCurrentProcess().Kill();
                     }
                     else
                     {
@@ -178,8 +177,8 @@ namespace MangaReader
             }
         }
 
-       void GetManga()
-       {
+        void GetManga()
+        {
             mangas = new List<Manga>();
 
             try

@@ -14,20 +14,20 @@ namespace MangaReader.Struct
         public Manga ParentManga { get; }
         public string ChapterName { get; }
         public string PathToChapter { get; }
-        public List<Picture> Images { get; }
+        public List<Picture> Images { get; private set; }
 
         public Chapter(Manga parentManga, string chapterName, string pathToChapter)
         {
             ParentManga = parentManga;
             ChapterName = chapterName;
             PathToChapter = pathToChapter;
-            Images = new List<Picture>(); // Инициализируем список изображений
-            GetImages();
         }
 
-        void GetImages()
+        public void GetImages()
         {
-            // Проверяем, существует ли папка главы
+            if (Images != null) return;
+
+            Images = new List<Picture>();
             if (!Directory.Exists(PathToChapter))
             {
                 return;
