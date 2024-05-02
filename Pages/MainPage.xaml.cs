@@ -24,5 +24,15 @@ namespace MangaReader.Pages
         {
             InitializeComponent();
         }
+
+        public void LoadFilteredManga(string searchText)
+        {
+            
+        }
+
+        public void UpdateListsManga()
+        {
+            
+        }
     }
 }

@@ -9,6 +9,7 @@
       Title="MainPage">
 
     <Grid>
-        
+        <ListBox HorizontalAlignment="Left" Height="352" Margin="10,10,0,0" VerticalAlignment="Top" Width="188" d:ItemsSource="{d:SampleData ItemCount=5}"/>
+
     </Grid>
 </Page>
