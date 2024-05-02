@@ -3,13 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MangaReader" AllowsTransparency="True"
-        mc:Ignorable="d" Style="{StaticResource VS2012WindowStyle}"
+        xmlns:local="clr-namespace:MangaReader"
+        mc:Ignorable="d" Style="{StaticResource VS2012WindowStyle}" WindowStartupLocation="CenterScreen" ResizeMode="CanResize"
         Title="MainWindow" Height="720" Width="1280" Loaded="Window_Loaded" Icon="/MangaReader.png">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="14*"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
 
 
@@ -39,20 +39,20 @@
             </Style>
         </Grid.Resources>
 
-        <Frame x:Name="MainFrame" Content="" NavigationUIVisibility="Hidden" Margin="0,0,0,0" Grid.Row="1" />
+        <Frame x:Name="MainFrame" Content="" NavigationUIVisibility="Hidden" Grid.Row="1" />
 
 
-        <TextBox x:Name="FindManga" Height="20" Margin="10,6,139,0" 
+        <TextBox x:Name="FindManga" Height="20" Margin="10,0,139,0" 
              TextWrapping="Wrap" Text="Поиск манги" Foreground="#f5f6f8"
             BorderBrush="#74788d" GotFocus="TextBox_GotFocus" 
              LostFocus="TextBox_LostFocus" TextChanged="FindMail_TextChanged" 
-                 VerticalAlignment="Top" Background="#22252f" BorderThickness="0"/>
+                 VerticalAlignment="Center" Background="#22252f" BorderThickness="0"/>
 
-        <Button x:Name="ButtonTextClear" Content="X" HorizontalAlignment="Right" Margin="0,8,142,0" Height="15" 
-                Click="ClearText_Click" Visibility="Visible" VerticalAlignment="Top" Width="16"/>
+        <Button x:Name="ButtonTextClear" Content="X" HorizontalAlignment="Right" Margin="0,0,142,0" Height="16" 
+                Click="ClearText_Click" Visibility="Hidden" Width="16"/>
 
 
-        <Button Content="Добавить книгу" HorizontalAlignment="Right" Margin="0,6,9,0" RenderTransformOrigin="1.01,0.05" Height="20" VerticalAlignment="Top" Width="115"/>
+        <Button Content="Добавить книгу" HorizontalAlignment="Right" Margin="0,0,10,0" RenderTransformOrigin="1.01,0.05" Height="20" Width="115"/>
 
     </Grid>
 </Window>
