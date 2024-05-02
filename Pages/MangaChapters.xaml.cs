@@ -46,9 +46,17 @@ namespace MangaReader.Pages
 
         private void ChaptersList_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            picturePage = new(mainWindow, ChaptersList.SelectedItem as Chapter);
-            MangaPictFrame.Content = picturePage;
+            if (ChaptersList.SelectedItem != null)
+            {
+                picturePage = new(mainWindow, ChaptersList.SelectedItem as Chapter);
+                MangaPictFrame.Content = picturePage;
 
+                // Получаем первое изображение главы
+                var firstImage = (picturePage.ListBoxPictures.Items.Count > 0) ? picturePage.ListBoxPictures.Items[0] : null;
+
+                // Выбираем первое изображение в ListBox
+                picturePage.ListBoxPictures.SelectedItem = firstImage;
+            }
         }
     }
 }
