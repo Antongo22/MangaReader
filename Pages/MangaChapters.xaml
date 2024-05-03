@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:MangaReader.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="MangaChapters">
+      Title="MangaChapters" PreviewKeyDown="ListBoxPictures_PreviewKeyDown">
 
     <Grid  PreviewKeyDown="ListBoxPictures_PreviewKeyDown">
         <Grid.ColumnDefinitions>
@@ -23,7 +23,7 @@
 
         <GridSplitter Grid.Column="1" HorizontalAlignment="Left" Width="4" Background="#2f323f"/>
 
-        <ListBox x:Name="ChaptersList" SelectionChanged="ChaptersList_SelectionChanged" >
+        <ListBox x:Name="ChaptersList" SelectionChanged="ChaptersList_SelectionChanged" PreviewKeyDown="ListBoxPictures_PreviewKeyDown">
             <ListBox.Resources>
                 <Style TargetType="ScrollViewer">
                     <Setter Property="Template">
@@ -65,7 +65,7 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <Frame x:Name="MangaPictFrame" Margin="4,0,0,0" 
+        <Frame x:Name="MangaPictFrame" Margin="4,0,0,0" PreviewKeyDown="ListBoxPictures_PreviewKeyDown"
        RenderTransformOrigin="0.5,0.5"  NavigationUIVisibility="Hidden" Grid.Column="1"/>
 
 

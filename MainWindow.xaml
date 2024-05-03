@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MangaReader"
         mc:Ignorable="d" Style="{StaticResource VS2012WindowStyle}" WindowStartupLocation="CenterScreen" ResizeMode="CanResize"
-        Title="MainWindow" Height="720" Width="1280" Loaded="Window_Loaded" Icon="/MangaReader.png">
+        Title="MainWindow" Height="720" Width="1280" Loaded="Window_Loaded" Icon="/MangaReader.png" PreviewKeyDown="ListBoxPictures_PreviewKeyDown">
 
     <Grid PreviewKeyDown="ListBoxPictures_PreviewKeyDown">
         <Grid.RowDefinitions>

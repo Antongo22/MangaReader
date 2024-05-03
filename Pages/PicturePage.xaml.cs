@@ -73,12 +73,13 @@ namespace MangaReader.Pages
 
         private void LeftPart_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-
+            System.Windows.Forms.MessageBox.Show("Test");
+            LastP(sender, e);
         }
 
         private void RightPart_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-
+            NextP(sender, e);
         }
 
         private void ListBoxPictures_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -110,38 +111,47 @@ namespace MangaReader.Pages
 
         public void ListBoxPictures_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Up || e.Key == Key.Left)
+            if (e.Key == Key.Up || e.Key == Key.Left )
             {
-                if (ListBoxPictures.SelectedIndex > 0)
-                {
-                    ListBoxPictures.SelectedIndex--;
-                    e.Handled = true;
-                }
-                else if (mangaChapters.ChaptersList.SelectedIndex > 0) 
-                {
-                    mangaChapters.isLastp = true;
-                    mangaChapters.ChaptersList.SelectedIndex--;
-                    mangaChapters.OpenLastPage();
-                    e.Handled = true;
-                }
+                LastP(sender, e);
             }
             else if (e.Key == Key.Down || e.Key == Key.Right)
             {
-                if (ListBoxPictures.SelectedIndex < ListBoxPictures.Items.Count - 1)
-                {
-                    ListBoxPictures.SelectedIndex++;
-                    e.Handled = true;
-                }
-                else if(mangaChapters.ChaptersList.SelectedIndex < mangaChapters.ChaptersList.Items.Count - 1)
-                {
-                    mangaChapters.ChaptersList.SelectedIndex++;
-                    mangaChapters.OpenFirstPage();
-                    e.Handled = true;
-                }
+                NextP(sender, e);
             }
-
-
         }
+
+        void LastP(object sender, InputEventArgs e)
+        {
+            if (ListBoxPictures.SelectedIndex > 0)
+            {
+                ListBoxPictures.SelectedIndex--;
+                e.Handled = true;
+            }
+            else if (mangaChapters.ChaptersList.SelectedIndex > 0)
+            {
+                mangaChapters.isLastp = true;
+                mangaChapters.ChaptersList.SelectedIndex--;
+                mangaChapters.OpenLastPage();
+                e.Handled = true;
+            }
+        }
+
+        void NextP(object sender, InputEventArgs e)
+        {
+            if (ListBoxPictures.SelectedIndex < ListBoxPictures.Items.Count - 1)
+            {
+                ListBoxPictures.SelectedIndex++;
+                e.Handled = true;
+            }
+            else if (mangaChapters.ChaptersList.SelectedIndex < mangaChapters.ChaptersList.Items.Count - 1)
+            {
+                mangaChapters.ChaptersList.SelectedIndex++;
+                mangaChapters.OpenFirstPage();
+                e.Handled = true;
+            }
+        }
+
 
         public void OpenLastPage()
         {
@@ -158,6 +168,5 @@ namespace MangaReader.Pages
                 ListBoxPictures.SelectedIndex = 0;
             }
         }
-
     }
 }

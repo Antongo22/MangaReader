@@ -6,12 +6,12 @@
       xmlns:local="clr-namespace:MangaReader.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="500" d:DesignWidth="800"
-      Title="PicturePage" MinWidth="250">
+      Title="PicturePage" MinWidth="250" PreviewKeyDown="ListBoxPictures_PreviewKeyDown">
 
     <Grid  PreviewKeyDown="ListBoxPictures_PreviewKeyDown">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="179*" MinWidth="100"/>
-            <ColumnDefinition Width="300*" />
+            <ColumnDefinition Width="300*"  />
             <ColumnDefinition Width="300*" />
         </Grid.ColumnDefinitions>
         <Grid.Resources>
@@ -22,9 +22,13 @@
             </Style>
         </Grid.Resources>
 
-        <WebBrowser Grid.ColumnSpan="2" Grid.Column="1" x:Name="WebBrowserImage"/>
+        
+        <WebBrowser Grid.ColumnSpan="2" Grid.Column="1"
+                    x:Name="WebBrowserImage" PreviewKeyDown="ListBoxPictures_PreviewKeyDown"/>
 
-        <ListBox x:Name="ListBoxPictures" Margin="0,0,5,0" SelectionChanged="ListBoxPictures_SelectionChanged"> 
+
+        <ListBox x:Name="ListBoxPictures" Margin="0,0,5,0" 
+                 SelectionChanged="ListBoxPictures_SelectionChanged" PreviewKeyDown="ListBoxPictures_PreviewKeyDown"> 
             <ListBox.Resources>
                 <Style TargetType="ScrollViewer">
                     <Setter Property="Template">
@@ -67,5 +71,6 @@
         </ListBox>
 
         <GridSplitter Margin="0,0,1,0" Width="4" Background="#2f323f"/>
+
     </Grid>
 </Page>
