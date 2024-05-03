@@ -58,5 +58,13 @@ namespace MangaReader.Pages
         {
             mangaChapters.LoadManga(ListBoxManga.SelectedItem as Manga);
         }
+
+        public void ListBoxPictures_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if(mangaChapters != null)
+            {
+                mangaChapters.ListBoxPictures_PreviewKeyDown(sender, e);
+            }
+        }
     }
 }

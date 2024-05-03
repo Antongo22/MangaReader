@@ -48,37 +48,48 @@ namespace MangaReader.Pages
         public void OpenLastPage()
         {
             isLastp = true;
-            picturePage = new(mainWindow, ChaptersList.SelectedItem as Chapter, this);
-            MangaPictFrame.Content = picturePage;
+            if (ChaptersList.SelectedItem != null)
+            {
+                picturePage = new PicturePage(mainWindow, ChaptersList.SelectedItem as Chapter, this);
+                MangaPictFrame.Content = picturePage;
 
-            var index = picturePage.ListBoxPictures.Items.Count - 1;
-            picturePage.ListBoxPictures.SelectedItem = index;
+                // Показываем последнюю страницу выбранной главы
+                picturePage.OpenLastPage();
+            }
         }
 
         public void OpenFirstPage()
         {
-            var firstImage = (picturePage.ListBoxPictures.Items.Count > 0) ? picturePage.ListBoxPictures.Items[0] : null;
-
-            picturePage.ListBoxPictures.SelectedItem = firstImage;
+            if (picturePage != null)
+            {
+                picturePage.OpenFirstPage();
+            }
         }
 
         private void ChaptersList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (isLastp)
             {
-                System.Windows.Forms.MessageBox.Show("Test");
                 isLastp = false;
                 return;
             }
-
-            if (ChaptersList.SelectedItem != null)
+            else if (ChaptersList.SelectedItem != null)
             {
-                picturePage = new(mainWindow, ChaptersList.SelectedItem as Chapter, this);
+                picturePage = new PicturePage(mainWindow, ChaptersList.SelectedItem as Chapter, this);
                 MangaPictFrame.Content = picturePage;
 
-                OpenFirstPage();
+                // Показываем первую страницу выбранной главы
+                picturePage.OpenFirstPage();
+            }
+        }
+
+        public void ListBoxPictures_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if(picturePage != null)
+            {
+                picturePage.ListBoxPictures_PreviewKeyDown(sender, e);
             }
         }
     }
-    
+
 }

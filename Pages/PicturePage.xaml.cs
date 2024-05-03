@@ -88,13 +88,10 @@ namespace MangaReader.Pages
                 Picture selectedImage = (Picture)ListBoxPictures.SelectedItem;
                 BitmapImage bitmapImage = selectedImage.BitmapImage;
 
-                // Конвертируем изображение в Base64 строку
                 string imageBase64 = ConvertBitmapImageToBase64(bitmapImage);
 
-                // Генерируем HTML-код для отображения картинки
                 string html = $"<html><head><style>img {{ max-width: 100%; height: auto; }}</style></head><body><img src='data:image/png;base64,{imageBase64}'></body></html>";
 
-                // Загружаем HTML-код в WebBrowser
                 WebBrowserImage.NavigateToString(html);
             }
         }
@@ -111,7 +108,7 @@ namespace MangaReader.Pages
             }
         }
 
-        private void ListBoxPictures_PreviewKeyDown(object sender, KeyEventArgs e)
+        public void ListBoxPictures_PreviewKeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Up || e.Key == Key.Left)
             {
@@ -122,8 +119,8 @@ namespace MangaReader.Pages
                 }
                 else if (mangaChapters.ChaptersList.SelectedIndex > 0) 
                 {
-                    mangaChapters.ChaptersList.SelectedIndex--;
                     mangaChapters.isLastp = true;
+                    mangaChapters.ChaptersList.SelectedIndex--;
                     mangaChapters.OpenLastPage();
                     e.Handled = true;
                 }
@@ -142,6 +139,25 @@ namespace MangaReader.Pages
                     e.Handled = true;
                 }
             }
+
+
         }
+
+        public void OpenLastPage()
+        {
+            if (ListBoxPictures.Items.Count > 0)
+            {
+                ListBoxPictures.SelectedIndex = ListBoxPictures.Items.Count - 1;
+            }
+        }
+
+        public void OpenFirstPage()
+        {
+            if (ListBoxPictures.Items.Count > 0)
+            {
+                ListBoxPictures.SelectedIndex = 0;
+            }
+        }
+
     }
 }

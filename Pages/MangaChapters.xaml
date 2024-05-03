@@ -8,7 +8,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="MangaChapters">
 
-    <Grid>
+    <Grid  PreviewKeyDown="ListBoxPictures_PreviewKeyDown">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="9*" MinWidth="100"/>
             <ColumnDefinition Width="31*" MinWidth="200"/>

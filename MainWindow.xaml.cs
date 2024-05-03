@@ -198,5 +198,13 @@ namespace MangaReader
             }
             catch (Exception ex) { }
         }
+
+        private void ListBoxPictures_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if(mainPage != null)
+            {
+                mainPage.ListBoxPictures_PreviewKeyDown(sender, e);
+            }
+        }
     }
 }
