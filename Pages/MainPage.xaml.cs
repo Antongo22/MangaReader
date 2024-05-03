@@ -46,12 +46,24 @@ namespace MangaReader.Pages
 
         public void LoadFilteredManga(string searchText)
         {
-            
+            ListBoxManga.Items.Clear();
+
+            foreach (var manga in mainWindow.mangas)
+            {
+                if (manga.Name.ToLower().Contains(searchText.ToLower()))
+                {
+                    ListBoxManga.Items.Add(manga);
+                }
+            }
         }
 
         public void UpdateListsManga()
         {
-            
+            ListBoxManga.Items.Clear();
+            foreach (var manga in mainWindow.mangas)
+            {
+                ListBoxManga.Items.Add(manga);
+            }
         }
 
         private void ListBoxManga_SelectionChanged(object sender, SelectionChangedEventArgs e)
