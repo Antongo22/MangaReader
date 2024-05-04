@@ -16,6 +16,7 @@ using System.IO;
 using System.Windows.Forms;
 using MangaReader.Struct;
 using System.Diagnostics;
+using System.IO.Compression;
 
 namespace MangaReader
 {
@@ -162,6 +163,11 @@ namespace MangaReader
             string[] files = Directory.GetFiles(sourceFolder);
             foreach (string file in files)
             {
+                if (Path.GetExtension(file).Equals(".zip", StringComparison.OrdinalIgnoreCase))
+                {
+                    continue;
+                }
+
                 string name = Path.GetFileName(file);
                 string dest = Path.Combine(destFolder, name);
                 File.Copy(file, dest);
@@ -171,11 +177,32 @@ namespace MangaReader
             string[] folders = Directory.GetDirectories(sourceFolder);
             foreach (string folder in folders)
             {
+                if (Path.GetExtension(folder).Equals(".zip", StringComparison.OrdinalIgnoreCase))
+                {
+                    continue;
+                }
+
                 string name = Path.GetFileName(folder);
                 string dest = Path.Combine(destFolder, name);
                 CopyFolder(folder, dest);
             }
+
+            // Разархивация архивов
+            string[] archives = Directory.GetFiles(sourceFolder, "*.zip");
+            foreach (string archive in archives)
+            {
+                string archiveName = Path.GetFileNameWithoutExtension(archive);
+                string extractPath = Path.Combine(destFolder, archiveName);
+
+                if (!Directory.Exists(extractPath))
+                {
+                    Directory.CreateDirectory(extractPath);
+                }
+
+                ZipFile.ExtractToDirectory(archive, extractPath);
+            }
         }
+
 
         void GetManga()
         {
