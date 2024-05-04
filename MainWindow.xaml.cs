@@ -118,7 +118,7 @@ namespace MangaReader
                 if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     newName:
-                    string newFolderName = Microsoft.VisualBasic.Interaction.InputBox("Введите название новой папки:", "Создание новой папки", "Новая папка");
+                    string newFolderName = Microsoft.VisualBasic.Interaction.InputBox("Введите название новой папки:", "Создание новой папки", Path.GetFileName(dialog.SelectedPath));
 
                     if (!string.IsNullOrWhiteSpace(newFolderName))
                     {
