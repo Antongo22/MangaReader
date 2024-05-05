@@ -24,6 +24,7 @@ namespace MangaReader.Pages
         PicturePage picturePage;
         MainWindow mainWindow;
         public bool isLastp = false;
+        Manga manga;
 
         public MangaChapters(MainWindow mainWindow)
         {
@@ -35,6 +36,8 @@ namespace MangaReader.Pages
         public void LoadManga(Manga manga)
         {
             if(manga == null) { return; }
+
+            this.manga = manga;
 
             manga.GetChapters();
 
@@ -48,13 +51,20 @@ namespace MangaReader.Pages
         public void OpenLastPage()
         {
             isLastp = true;
-            if (ChaptersList.SelectedItem != null)
+            if (ChaptersList.SelectedItem != null && manga != null)
             {
-                picturePage = new PicturePage(mainWindow, ChaptersList.SelectedItem as Chapter, this);
-                MangaPictFrame.Content = picturePage;
+                if(manga.isPDF)
+                {
+                   // TODO : доделать страницу открытия с PDF форматои
+                }
+                else
+                {
+                    picturePage = new PicturePage(mainWindow, ChaptersList.SelectedItem as ChapterImg, this);
+                    MangaPictFrame.Content = picturePage;
 
-                // Показываем последнюю страницу выбранной главы
-                picturePage.OpenLastPage();
+                    // Показываем последнюю страницу выбранной главы
+                    picturePage.OpenLastPage();
+                }
             }
         }
 
@@ -75,11 +85,18 @@ namespace MangaReader.Pages
             }
             else if (ChaptersList.SelectedItem != null)
             {
-                picturePage = new PicturePage(mainWindow, ChaptersList.SelectedItem as Chapter, this);
-                MangaPictFrame.Content = picturePage;
+                if (manga.isPDF)
+                {
 
-                // Показываем первую страницу выбранной главы
-                picturePage.OpenFirstPage();
+                }
+                else
+                {
+                    picturePage = new PicturePage(mainWindow, ChaptersList.SelectedItem as ChapterImg, this);
+                    MangaPictFrame.Content = picturePage;
+
+                    // Показываем первую страницу выбранной главы
+                    picturePage.OpenFirstPage();
+                }
             }
         }
 

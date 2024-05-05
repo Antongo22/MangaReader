@@ -23,10 +23,10 @@ namespace MangaReader.Pages
     public partial class PicturePage : Page
     {
         MainWindow mainWindow;
-        Chapter chapter;
+        ChapterImg chapter;
         MangaChapters mangaChapters;
 
-        public PicturePage(MainWindow mainWindow, Chapter chapter, MangaChapters mangaChapters)
+        public PicturePage(MainWindow mainWindow, ChapterImg chapter, MangaChapters mangaChapters)
         {
             InitializeComponent();
             this.mainWindow = mainWindow;
