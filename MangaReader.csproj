@@ -73,6 +73,7 @@
     </Compile>
     <Compile Include="Struct\Chapter.cs" />
     <Compile Include="Struct\ChapterImg.cs" />
+    <Compile Include="Struct\ChaptersPDF.cs" />
     <Compile Include="Struct\Manga.cs" />
     <Compile Include="Struct\Picture.cs" />
     <Compile Include="Styles\VS2012\VS2012WindowStyle.cs" />
