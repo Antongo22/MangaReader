@@ -60,6 +60,9 @@ namespace MangaReader.Struct
 
         void ChaptersFromPDF()
         {
+            // Удаление всех HTML файлов перед началом сбора глав
+            DeleteAllHtmlFiles();
+
             if (Chapters != null) return;
 
             Chapters = new List<Chapter>();
@@ -76,6 +79,25 @@ namespace MangaReader.Struct
             {
                 string chapterName = System.IO.Path.GetFileName(chapterDirectory);
                 Chapters.Add(new ChaptersPDF(this, chapterName, chapterDirectory));
+            }
+        }
+
+        void DeleteAllHtmlFiles()
+        {
+            try
+            {
+                // Получение всех HTML файлов в директории
+                string[] htmlFiles = Directory.GetFiles(Path, "*.html");
+
+                // Удаление каждого HTML файла
+                foreach (string htmlFile in htmlFiles)
+                {
+                    File.Delete(htmlFile);
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show($"Ошибка при удалении HTML файлов: {ex.Message}");
             }
         }
 

@@ -42,6 +42,8 @@ namespace MangaReader.Pages
 
         void LoadChapter()
         {
+            GC.Collect();
+
             try
             {
                 if (!string.IsNullOrEmpty(chapter.PathToChapter))
