@@ -22,6 +22,7 @@ namespace MangaReader.Pages
     public partial class MangaChapters : Page
     {
         PicturePage picturePage;
+        PDFPage PDFPage;
         MainWindow mainWindow;
         public bool isLastp = false;
         Manga manga;
@@ -55,7 +56,8 @@ namespace MangaReader.Pages
             {
                 if(manga.isPDF)
                 {
-                   // TODO : доделать страницу открытия с PDF форматои
+                    PDFPage = new PDFPage(mainWindow, ChaptersList.SelectedItem as ChaptersPDF, this);
+                    MangaPictFrame.Content = PDFPage;
                 }
                 else
                 {
@@ -87,7 +89,8 @@ namespace MangaReader.Pages
             {
                 if (manga.isPDF)
                 {
-
+                    PDFPage = new PDFPage(mainWindow, ChaptersList.SelectedItem as ChaptersPDF, this);
+                    MangaPictFrame.Content = PDFPage;
                 }
                 else
                 {

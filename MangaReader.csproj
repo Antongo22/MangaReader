@@ -68,6 +68,9 @@
     <Compile Include="Pages\MangaChapters.xaml.cs">
       <DependentUpon>MangaChapters.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\PDFPage.xaml.cs">
+      <DependentUpon>PDFPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\PicturePage.xaml.cs">
       <DependentUpon>PicturePage.xaml</DependentUpon>
     </Compile>
@@ -94,6 +97,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\MangaChapters.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\PDFPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

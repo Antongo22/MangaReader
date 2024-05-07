@@ -68,6 +68,7 @@ namespace MangaReader.Pages
 
         private void ListBoxManga_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            mangaChapters.ChaptersList.Items.Clear();
             mangaChapters.LoadManga(ListBoxManga.SelectedItem as Manga);
         }
 

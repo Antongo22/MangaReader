@@ -15,6 +15,7 @@ namespace MangaReader.Struct
         public List<Chapter> Chapters { get; private set; }
 
         public readonly bool isPDF;
+        bool isInPdfFormat;
 
 
         public Manga(string name, string path)
@@ -59,7 +60,23 @@ namespace MangaReader.Struct
 
         void ChaptersFromPDF()
         {
-            // TODO : тут код по получению глав в PDF версии
+            if (Chapters != null) return;
+
+            Chapters = new List<Chapter>();
+
+            if (!Directory.Exists(Path))
+            {
+                return;
+            }
+
+            string[] chapterDirectories = Directory.GetFiles(Path);
+
+            var sortedChapterDirectories = NaturalSort(chapterDirectories);
+            foreach (string chapterDirectory in sortedChapterDirectories)
+            {
+                string chapterName = System.IO.Path.GetFileName(chapterDirectory);
+                Chapters.Add(new ChaptersPDF(this, chapterName, chapterDirectory));
+            }
         }
 
 
@@ -72,7 +89,30 @@ namespace MangaReader.Struct
 
         bool IsPDFCheck()
         {
-            // TODO проверить на то, есть главы в формате pdf
+            try
+            {
+                if (Directory.Exists(Path))
+                {
+                    string[] files = Directory.GetFiles(Path);
+
+                    foreach (string file in files)
+                    {
+                        if (System.IO.Path.GetExtension(file).Equals(".pdf", StringComparison.OrdinalIgnoreCase))
+                        {
+                            isInPdfFormat = true;
+                            return true;
+                        }
+                    }
+                }
+                else
+                {
+                    System.Windows.Forms.MessageBox.Show("Указанная директория не существует.");
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Windows.Forms.MessageBox.Show($"Ошибка при проверке файлов: {ex.Message}");
+            }
 
             return false;
         }
