@@ -21,7 +21,74 @@
                 <Setter Property="Background" Value="#2f323f"/>
                 <Setter Property="Foreground" Value="#f5f6f8"/>
             </Style>
+            <SolidColorBrush x:Key="MidBrsh" Color="#343a40"/>
+
+            <!-- ContextMenu separator style -->
+            <Style x:Key="MenuSeparatorStyle" TargetType="{x:Type Separator}">
+                <Setter Property="SnapsToDevicePixels" Value="True"/>
+                <Setter Property="OverridesDefaultStyle" Value="True"/>
+                <Setter Property="IsTabStop" Value="False"/>
+                <Setter Property="KeyboardNavigation.IsTabStop" Value="False"/>
+                <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+                <Setter Property="Background" Value="#323232"/>
+                <Setter Property="Height" Value="5"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Separator}">
+                            <Border Height="5" Margin="-2,2" VerticalAlignment="Center" Background="#FF464646"/>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <!-- MenuItem style -->
+            <Style TargetType="{x:Type MenuItem}">
+                <Setter Property="SnapsToDevicePixels" Value="True"/>
+                <Setter Property="OverridesDefaultStyle" Value="True"/>
+                <Setter Property="Foreground" Value="#f5f6f8"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type MenuItem}">
+                            <Grid Name="Root" Height="27" Background="{StaticResource MidBrsh}">
+                                <ContentPresenter Name="HeaderHost" Margin="10,0,0,0" ContentSource="Header" RecognizesAccessKey="True" HorizontalAlignment="Left" VerticalAlignment="Center"
+                      TextOptions.TextRenderingMode="ClearType" TextBlock.FontSize="12" TextBlock.Foreground="{TemplateBinding Foreground}" TextOptions.TextFormattingMode="Display"/>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="Root" Property="Background" Value="#74788d"/>
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="Root" Property="Background" Value="#808080"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <!-- ContextMenu style -->
+            <Style TargetType="{x:Type ContextMenu}">
+                <Setter Property="SnapsToDevicePixels" Value="True"/>
+                <Setter Property="OverridesDefaultStyle" Value="True"/>
+                <Setter Property="Cursor" Value="Hand"/>
+                <Setter Property="Width" Value="170"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ContextMenu}">
+                            <Grid Background="Transparent">
+                                <Border Margin="0,0,5,5" Background="{StaticResource MidBrsh}" BorderThickness="0">
+                                    <StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Cycle" Margin="2"/>
+                                    <Border.Effect>
+                                        <DropShadowEffect BlurRadius="3" ShadowDepth="3" Color="#343a40" Opacity="0.5"/>
+                                    </Border.Effect>
+                                </Border>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
         </Grid.Resources>
+
 
         <GridSplitter Grid.Column="1" HorizontalAlignment="Left" Width="4" Background="#2f323f"/>
 
@@ -65,6 +132,15 @@
                     <TextBlock Text="{Binding Name}" />
                 </DataTemplate>
             </ListBox.ItemTemplate>
+
+
+            <ItemsControl.ContextMenu >
+                <ContextMenu x:Name="MangaContextMenu" Background="#FF343A40" BorderBrush="#FF74788D" Foreground="#FFF5F6F8">
+                    <MenuItem x:Name="Manga_MenuItemAddChepter" Header="Добавить главу"/>
+                    <Separator Style="{StaticResource MenuSeparatorStyle}"/>
+                    <MenuItem x:Name="Manga_MenuItemDelete" Header="Удалить"/>
+                </ContextMenu>
+            </ItemsControl.ContextMenu>
         </ListBox>
 
         <Frame x:Name="MangaChaptersFrame" Margin="5,0,0,0"  Grid.Column="1" PreviewKeyDown="ListBoxPictures_PreviewKeyDown"

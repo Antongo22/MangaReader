@@ -139,5 +139,28 @@ namespace MangaReader.Struct
             return false;
         }
 
+        public void AddChapter(string chapterPath)
+        {
+            string chapterName = System.IO.Path.GetFileName(chapterPath);
+
+            Chapter newChapter;
+            if (isPDF)
+            {
+                newChapter = new ChaptersPDF(this, chapterName, chapterPath);
+            }
+            else
+            {
+                newChapter = new ChapterImg(this, chapterName, chapterPath);
+            }
+
+            Chapters ??= new List<Chapter>();
+            Chapters.Add(newChapter);
+
+            Chapters = NaturalSort(Chapters.Select(chapter => chapter.ChapterName)).Select(chapterName =>
+            {
+                return Chapters.First(chapter => chapter.ChapterName == chapterName);
+            }).ToList();
+        }
+
     }
 }
