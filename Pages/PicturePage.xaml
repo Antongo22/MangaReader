@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:MangaReader.Pages"
+       xmlns:cefSharp="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
       mc:Ignorable="d" 
       d:DesignHeight="500" d:DesignWidth="800"
       Title="PicturePage" MinWidth="250" PreviewKeyDown="ListBoxPictures_PreviewKeyDown">
@@ -23,9 +24,9 @@
         </Grid.Resources>
 
         
-        <WebBrowser Grid.ColumnSpan="2" Grid.Column="1"
-                    x:Name="WebBrowserImage" PreviewKeyDown="ListBoxPictures_PreviewKeyDown"/>
-
+       
+        <cefSharp:ChromiumWebBrowser Grid.ColumnSpan="2" Grid.Column="1" x:Name="chromiumWebBrowser"  
+                                     PreviewKeyDown="ListBoxPictures_PreviewKeyDown"/>
 
         <ListBox x:Name="ListBoxPictures" Margin="0,0,5,0" 
                  SelectionChanged="ListBoxPictures_SelectionChanged" PreviewKeyDown="ListBoxPictures_PreviewKeyDown"> 

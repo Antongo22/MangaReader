@@ -1,4 +1,5 @@
-﻿using MangaReader.Struct;
+﻿using CefSharp;
+using MangaReader.Struct;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -93,7 +94,7 @@ namespace MangaReader.Pages
 
                 string html = $"<html><head><style>img {{ max-width: 100%; height: auto; }}</style></head><body><img src='data:image/png;base64,{imageBase64}'></body></html>";
 
-                WebBrowserImage.NavigateToString(html);
+                chromiumWebBrowser.LoadHtml(html, "http://localhost/");
             }
         }
 
