@@ -141,7 +141,6 @@
                     <MenuItem x:Name="Manga_MenuItemDelete" Header="Удалить" Click="DeleteManga"/>
                 </ContextMenu>
             </ItemsControl.ContextMenu>
-            <Button Content="Button"/>
         </ListBox>
 
         <Frame x:Name="MangaChaptersFrame" Margin="5,0,0,0"  Grid.Column="1" PreviewKeyDown="ListBoxPictures_PreviewKeyDown"
