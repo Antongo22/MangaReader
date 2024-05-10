@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -78,6 +79,42 @@ namespace MangaReader.Pages
             {
                 mangaChapters.ListBoxPictures_PreviewKeyDown(sender, e);
             }
+        }
+
+        private void DeleteManga(object sender, RoutedEventArgs e)
+        {
+            if (ListBoxManga.SelectedItem == null) return;
+
+            var selectedManga = ListBoxManga.SelectedItem as Manga;
+
+            if(selectedManga == null) return;
+            var confirmResult = MessageBox.Show("Вы уверены, что хотите удалить выбранную мангу?", "Подтверждение удаления", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (confirmResult == MessageBoxResult.Yes)
+            {
+                ListBoxManga.Items.Remove(selectedManga);
+
+                DeleteMangaDirectory(selectedManga);
+                mainWindow.mangas.Remove(selectedManga);
+            }
+        }
+
+        void DeleteMangaDirectory(Manga remmanga)
+        {
+            string deletePath = remmanga.Path;
+
+            try
+            {
+                Directory.Delete(deletePath, true);
+            }
+            catch (IOException ex)
+            {
+            }
+        }
+
+        private void AddChepterInManga(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

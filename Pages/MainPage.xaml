@@ -136,11 +136,12 @@
 
             <ItemsControl.ContextMenu >
                 <ContextMenu x:Name="MangaContextMenu" Background="#FF343A40" BorderBrush="#FF74788D" Foreground="#FFF5F6F8">
-                    <MenuItem x:Name="Manga_MenuItemAddChepter" Header="Добавить главу"/>
+                    <MenuItem x:Name="Manga_MenuItemAddChepter" Header="Добавить главу" Click="AddChepterInManga"/>
                     <Separator Style="{StaticResource MenuSeparatorStyle}"/>
-                    <MenuItem x:Name="Manga_MenuItemDelete" Header="Удалить"/>
+                    <MenuItem x:Name="Manga_MenuItemDelete" Header="Удалить" Click="DeleteManga"/>
                 </ContextMenu>
             </ItemsControl.ContextMenu>
+            <Button Content="Button"/>
         </ListBox>
 
         <Frame x:Name="MangaChaptersFrame" Margin="5,0,0,0"  Grid.Column="1" PreviewKeyDown="ListBoxPictures_PreviewKeyDown"
