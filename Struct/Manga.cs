@@ -15,7 +15,6 @@ namespace MangaReader.Struct
         public List<Chapter> Chapters { get; private set; }
 
         public readonly bool isPDF;
-        bool isInPdfFormat;
 
 
         public Manga(string name, string path)
@@ -121,7 +120,6 @@ namespace MangaReader.Struct
                     {
                         if (System.IO.Path.GetExtension(file).Equals(".pdf", StringComparison.OrdinalIgnoreCase))
                         {
-                            isInPdfFormat = true;
                             return true;
                         }
                     }
@@ -146,10 +144,12 @@ namespace MangaReader.Struct
             Chapter newChapter;
             if (isPDF)
             {
+                CopyPdfChaptert(chapterPath);
                 newChapter = new ChaptersPDF(this, chapterName, chapterPath);
             }
             else
             {
+                CopyDirecttoryChapter(chapterPath);
                 newChapter = new ChapterImg(this, chapterName, chapterPath);
             }
 
@@ -161,6 +161,70 @@ namespace MangaReader.Struct
                 return Chapters.First(chapter => chapter.ChapterName == chapterName);
             }).ToList();
         }
+
+        void CopyDirecttoryChapter(string chapterPath)
+        {
+            if (!Directory.Exists(Path))
+            {
+                Directory.CreateDirectory(Path);
+            }
+
+            string chapterName = System.IO.Path.GetFileName(chapterPath);
+
+            string destinationPath = System.IO.Path.Combine(Path, chapterName);
+
+            DirectoryCopy(chapterPath, destinationPath, true);
+        }
+
+        void CopyPdfChaptert(string chapterPath)
+        {
+            if (!Directory.Exists(Path))
+            {
+                Directory.CreateDirectory(Path); 
+            }
+
+            string chapterName = System.IO.Path.GetFileName(chapterPath);
+
+            string destinationPath = System.IO.Path.Combine(Path, chapterName);
+
+            File.Copy(chapterPath, destinationPath);
+        }
+
+        // Метод для рекурсивного копирования директории
+        void DirectoryCopy(string sourceDirName, string destDirName, bool copySubDirs)
+        {
+            DirectoryInfo dir = new DirectoryInfo(sourceDirName);
+            DirectoryInfo[] dirs = dir.GetDirectories();
+
+            if (!dir.Exists)
+            {
+                throw new DirectoryNotFoundException(
+                    "Source directory does not exist or could not be found: "
+                    + sourceDirName);
+            }
+
+            if (!Directory.Exists(destDirName))
+            {
+                Directory.CreateDirectory(destDirName);
+            }
+
+            FileInfo[] files = dir.GetFiles();
+            foreach (FileInfo file in files)
+            {
+                string temppath = System.IO.Path.Combine(destDirName, file.Name);
+                file.CopyTo(temppath, false);
+            }
+
+            if (copySubDirs)
+            {
+                foreach (DirectoryInfo subdir in dirs)
+                {
+                    string temppath = System.IO.Path.Combine(destDirName, subdir.Name);
+                    DirectoryCopy(subdir.FullName, temppath, copySubDirs);
+                }
+            }
+        }
+
 
     }
 }

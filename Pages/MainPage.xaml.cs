@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -73,7 +74,7 @@ namespace MangaReader.Pages
             mangaChapters.LoadManga(ListBoxManga.SelectedItem as Manga);
         }
 
-        public void ListBoxPictures_PreviewKeyDown(object sender, KeyEventArgs e)
+        public void ListBoxPictures_PreviewKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
             if(mangaChapters != null)
             {
@@ -88,7 +89,7 @@ namespace MangaReader.Pages
             var selectedManga = ListBoxManga.SelectedItem as Manga;
 
             if(selectedManga == null) return;
-            var confirmResult = MessageBox.Show("Вы уверены, что хотите удалить выбранную мангу?", "Подтверждение удаления", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var confirmResult = System.Windows.MessageBox.Show("Вы уверены, что хотите удалить выбранную мангу?", "Подтверждение удаления", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
             if (confirmResult == MessageBoxResult.Yes)
             {
@@ -114,7 +115,58 @@ namespace MangaReader.Pages
 
         private void AddChepterInManga(object sender, RoutedEventArgs e)
         {
+            if (ListBoxManga.SelectedItem == null) return;
 
+            Manga selectedManga = ListBoxManga.SelectedItem as Manga;
+
+            string pathToChapter;
+
+            if(selectedManga.isPDF)
+            {
+                pathToChapter = OpenPdfChepter();
+            }
+            else
+            {
+                pathToChapter = OpenDirectoryChepter();
+            }
+
+            if (!String.IsNullOrEmpty(pathToChapter))
+            {
+                selectedManga.AddChapter(pathToChapter);
+            }
+        }
+
+
+        string OpenDirectoryChepter()
+        {
+            FolderBrowserDialog folderDialog = new FolderBrowserDialog();
+
+            if (folderDialog.ShowDialog() == DialogResult.OK)
+            {
+                return folderDialog.SelectedPath;
+            }
+            else
+            {
+                return string.Empty;
+            }
+        }
+
+        string OpenPdfChepter()
+        {
+            OpenFileDialog fileDialog = new OpenFileDialog();
+
+            fileDialog.Filter = "PDF files (*.pdf)|*.pdf";
+
+            fileDialog.Title = "Select PDF File";
+
+            if (fileDialog.ShowDialog() == DialogResult.OK)
+            {
+                return fileDialog.FileName;
+            }
+            else
+            {
+                return string.Empty;
+            }
         }
     }
 }
