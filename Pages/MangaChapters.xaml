@@ -63,6 +63,13 @@
                     <TextBlock Text="{Binding ChapterName}" />
                 </DataTemplate>
             </ListBox.ItemTemplate>
+
+            <ItemsControl.ContextMenu >
+                <ContextMenu x:Name="ChepterContextMenu" Background="#FF343A40" BorderBrush="#FF74788D" Foreground="#FFF5F6F8">
+                    <MenuItem x:Name="Chepter_MenuItemDelete" Header="Удалить" Click="DeleteChapter"/>
+                </ContextMenu>
+            </ItemsControl.ContextMenu>
+
         </ListBox>
 
         <Frame x:Name="MangaPictFrame" Margin="4,0,0,0" PreviewKeyDown="ListBoxPictures_PreviewKeyDown"
